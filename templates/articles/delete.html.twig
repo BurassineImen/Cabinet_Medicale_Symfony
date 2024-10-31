@@ -1,0 +1,14 @@
+{# templates/articles/delete.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmer la Suppression{% endblock %}
+
+{% block body %}
+    <h1> Êtes-vous sûr de vouloir supprimer l'article "{{ article.nom }}" ?</h1>
+
+
+        <button type="submit" class="btn btn-danger">Confirmer</button>
+   
+
+    <a href="{{ path('article_list') }}" class="btn btn-secondary">Annuler</a>
+{% endblock %}
