@@ -9,22 +9,32 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AppointmentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('doctor', EntityType::class, [
-                'class' => Doctor::class, // L'entité cible
-                'choice_label' => 'name', // La propriété affichée dans la liste déroulante
-                'label' => 'Choisir un médecin',
-            ])
-            ->add('date', DateTimeType::class, [
-                'widget' => 'single_text', // Rend le champ compatible avec HTML5
-                'label' => 'Choisir une date et une heure',
-            ]);
-    }
+{
+    $builder
+        ->add('doctor', EntityType::class, [
+            'class' => Doctor::class,
+            'choice_label' => 'name',
+            'label' => 'Choisir un médecin',
+        ])
+        ->add('date', DateTimeType::class, [
+            'widget' => 'single_text',
+            'label' => 'Choisir une date et une heure',
+        ]);
+     /*    ->add('patientName', TextType::class, [
+            'label' => 'Nom du patient',
+            'mapped' => false, // Ce champ n'est pas directement mappé à l'entité
+        ])
+        ->add('patientEmail', TextType::class, [
+            'label' => 'Email du patient',
+            'mapped' => false, // Ce champ n'est pas directement mappé à l'entité
+        ]);
+         */
+}
 
     public function configureOptions(OptionsResolver $resolver): void
     {

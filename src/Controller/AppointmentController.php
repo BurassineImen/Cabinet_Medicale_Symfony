@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Appointment;
+use App\Entity\Patient;
 use App\Form\AppointmentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -103,4 +104,6 @@ class AppointmentController extends AbstractController
 
         return $this->redirectToRoute('app_appointment');
     }
+
+    
 }

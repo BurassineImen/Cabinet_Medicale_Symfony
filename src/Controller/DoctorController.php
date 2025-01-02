@@ -82,4 +82,20 @@ class DoctorController extends AbstractController
 
         return $this->redirectToRoute('doctor_index');
     }
+
+    #[Route('/doctor/{id}/appointments', name: 'doctor_appointments', methods: ['GET'])]
+    public function doctorAppointments(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $doctor = $entityManager->getRepository(Doctor::class)->find($id);
+
+        if (!$doctor) {
+            throw $this->createNotFoundException('Médecin non trouvé.');
+        }
+
+        return $this->render('doctor/appointments.html.twig', [
+            'appointments' => $doctor->getAppointments(),
+            'doctor' => $doctor,
+        ]);
+    }
+
 }

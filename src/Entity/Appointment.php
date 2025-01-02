@@ -19,7 +19,7 @@ class Appointment
     private ?Doctor $doctor = null;
 
     #[ORM\ManyToOne(inversedBy: 'appointments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)] 
     private ?Patient $patient = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
