@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Médecin{% endblock %}
+
+{% block body %}
+    {% include 'header.html.twig' %}
+        <h1>Détails du médecin</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Prénom</th>
+                    <td>{{ doctor.firstName }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ doctor.name }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ doctor.email }}</td>
+                </tr>
+                <tr>
+                    <th>Spécialité</th>
+                    <td>{{ doctor.speciality }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('doctor_edit', {'id': doctor.id}) }}" class="btn btn-warning">Modifier</a>
+        <a href="{{ path('doctor_index') }}" class="btn btn-secondary">Retour à la liste</a>
+
+        <form method="post" action="{{ path('doctor_delete', {'id': doctor.id}) }}" style="display: inline-block"
+              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce médecin ?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ doctor.id) }}">
+            <button class="btn btn-danger">Supprimer</button>
+        </form>
+    </div>
+{% endblock %}

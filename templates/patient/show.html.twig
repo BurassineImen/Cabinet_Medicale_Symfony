@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patient{% endblock %}
+
+{% block body %}
+    <h1>Patient</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ patient.id }}</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td>{{ patient.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{ patient.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Birth Date</th>
+                <td>{{ patient.birthDate ? patient.birthDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ patient.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('patient_index') }}">Back to list</a>
+    <a href="{{ path('patient_edit', {'id': patient.id}) }}">Edit</a>
+    <form method="post" action="{{ path('patient_delete', {'id': patient.id}) }}" style="display:inline-block;">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ patient.id) }}">
+        <button class="btn btn-danger">Delete</button>
+    </form>
+{% endblock %}

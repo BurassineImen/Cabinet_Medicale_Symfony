@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Médecins{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Liste des Médecins</h1>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <a href="{{ path('doctor_new') }}" class="btn btn-primary mb-3">Ajouter un médecin</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Spécialité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for doctor in doctors %}
+                <tr>
+                    <td>{{ doctor.name }}</td>
+                    <td>{{ doctor.email }}</td>
+                    <td>{{ doctor.speciality }}</td>
+                    <td>
+                        <a href="{{ path('doctor_show', {'id': doctor.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                        <a href="{{ path('doctor_edit', {'id': doctor.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                        <form method="post" action="{{ path('doctor_delete', {'id': doctor.id}) }}" style="display: inline-block"
+                              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce médecin ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ doctor.id) }}">
+                            <button class="btn btn-danger btn-sm">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun médecin trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

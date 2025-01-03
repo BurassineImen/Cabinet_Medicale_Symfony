@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Appointment{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0"><i class="bi bi-calendar-check"></i> Create New Appointment</h3>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(form.date, {
+                            'label_attr': {'class': 'form-label fw-bold'},
+                            'attr': {'class': 'form-control', 'placeholder': 'Select a date'}
+                        }) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.patient, {
+                            'label_attr': {'class': 'form-label fw-bold'},
+                            'attr': {'class': 'form-select'}
+                        }) }}
+                    </div>
+                </div>
+                <div class="mt-4 d-flex justify-content-end">
+                    <button class="btn btn-success me-2" type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Save the appointment">
+                        <i class="bi bi-save"></i> Save
+                    </button>
+                    <a class="btn btn-outline-secondary" href="{{ path('appointment_index') }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Back to the list">
+                        <i class="bi bi-arrow-left"></i> Back to list
+                    </a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

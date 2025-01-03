@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un Nouveau Médecin{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-primary"><i class="bi bi-person-plus"></i> Créer un Nouveau Médecin</h1>
+            <a href="{{ path('doctor_index') }}" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Retourner à la liste des médecins">
+                <i class="bi bi-arrow-left"></i> Retour à la liste
+            </a>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                {{ form_start(form) }}
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        {{ form_row(form.firstName, {
+                            'label': 'Prénom',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Entrez le prénom du médecin'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.name, {
+                            'label': 'Nom',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Entrez le nom du médecin'
+                            }
+                        }) }}
+                    </div>
+                </div>
+                <div class="row g-3 mt-3">
+                    <div class="col-md-6">
+                        {{ form_row(form.email, {
+                            'label': 'Email',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Entrez l\'email du médecin'
+                            }
+                        }) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.speciality, {
+                            'label': 'Spécialité',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Entrez la spécialité'
+                            }
+                        }) }}
+                    </div>
+                </div>
+                <div class="mt-4 d-flex justify-content-end">
+                    <button class="btn btn-primary" type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Enregistrer ce médecin">
+                        <i class="bi bi-save"></i> Enregistrer
+                    </button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
