@@ -1,0 +1,85 @@
+{% block body %}
+    {% include 'header.html.twig' %}
+
+    <style>
+        .speciality-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-container {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background: #0056b3;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btn-home i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .speciality-title {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color:rgb(0, 0, 0);
+        }
+
+        .table {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            width: 30%;
+            background: #007bff;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+
+    <div class="container speciality-container">
+        <div class="btn-container">
+            <a href="/speciality" class="btn btn-home">
+                <i class="fas fa-home"></i> Retour à la liste
+            </a>
+        </div>
+
+        <h1 class="text-center speciality-title">Détails de la Spécialité</h1>
+
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    <th scope="row" class="table-header">ID</th>
+                    <td>{{ speciality.id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="table-header">Titre</th>
+                    <td style= "color:black">{{ speciality.title }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

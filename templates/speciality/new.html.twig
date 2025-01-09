@@ -1,0 +1,14 @@
+{% block body %}
+    {% include 'header.html.twig' %}
+{% block title %}New Speciality{% endblock %}
+
+ <a href="/" class="btn-home">
+        <i class="fas fa-home"></i>
+    </a>
+    <h1>Create new Speciality</h1>
+
+    {{ include('speciality/_form.html.twig') }}
+
+    <a href="{{ path('app_speciality') }}">back to list</a>
+
+{% endblock %}

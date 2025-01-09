@@ -22,26 +22,7 @@ class DoctorController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'doctor_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $doctor = new Doctor();
-        $form = $this->createForm(DoctorType::class, $doctor);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($doctor);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Le médecin a été créé avec succès.');
-            return $this->redirectToRoute('doctor_index');
-        }
-
-        return $this->render('doctor/new.html.twig', [
-            'doctor' => $doctor,
-            'form' => $form,
-        ]);
-    }
+    
 
     #[Route('/{id}', name: 'doctor_show', methods: ['GET'])]
     public function show(Doctor $doctor): Response

@@ -1,3 +1,5 @@
+{% block body %}
+    {% include 'header.html.twig' %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,6 +8,8 @@
     <title>Créer / Modifier un rendez-vous</title>
     <!-- Lien vers Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 <style>
     body {
         background: linear-gradient(135deg, #d1e8ff, #82b1ff);
@@ -14,6 +18,7 @@
         padding: 20px;
         margin: 0;
     }
+
     h1 {
         color: #02457a;
         font-weight: 700;
@@ -73,6 +78,7 @@
 
 </head>
 <body>
+
     <div class="container mt-4">
         <h1 class="text-center">Modifier un rendez-vous</h1>
 
@@ -94,3 +100,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+{% endblock %}

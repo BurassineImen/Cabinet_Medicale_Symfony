@@ -1,8 +1,6 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Liste des Médecins{% endblock %}
 
 {% block body %}
+    {% include 'header.html.twig' %}
     <div class="container mt-4">
         <h1>Liste des Médecins</h1>
 
@@ -12,11 +10,11 @@
             </div>
         {% endfor %}
 
-        <a href="{{ path('doctor_new') }}" class="btn btn-primary mb-3">Ajouter un médecin</a>
-
+   
         <table class="table">
             <thead>
                 <tr>
+                    <th>Prénom</th>
                     <th>Nom</th>
                     <th>Email</th>
                     <th>Spécialité</th>
@@ -26,22 +24,21 @@
             <tbody>
             {% for doctor in doctors %}
                 <tr>
-                    <td>{{ doctor.name }}</td>
+                    <td>{{ doctor.firstName }}</td>
+                    <td>{{ doctor.lastName }}</td>
                     <td>{{ doctor.email }}</td>
-                    <td>{{ doctor.speciality }}</td>
+                    <td>{{ doctor.speciality.title }}</td>
                     <td>
                         <a href="{{ path('doctor_show', {'id': doctor.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                         {% if  is_granted('ROLE_ADMIN')  %}
                         <a href="{{ path('doctor_edit', {'id': doctor.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
-                        <form method="post" action="{{ path('doctor_delete', {'id': doctor.id}) }}" style="display: inline-block"
-                              onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce médecin ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ doctor.id) }}">
-                            <button class="btn btn-danger btn-sm">Supprimer</button>
-                        </form>
+                        {% endif %}
+                       
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4">Aucun médecin trouvé</td>
+                    <td colspan="5">Aucun médecin trouvé</td>
                 </tr>
             {% endfor %}
             </tbody>

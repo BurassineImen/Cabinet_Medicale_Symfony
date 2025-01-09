@@ -1,3 +1,6 @@
+
+{% block body %}
+    {% include 'header.html.twig' %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -92,31 +95,6 @@
 </head>
 <body>
 
-    <!-- Barre de navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">Cabinet SantéPro</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/"><i class="bi bi-house"></i> Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/doctor/"><i class="bi bi-person-circle"></i> Nos Médecins</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/patient/"><i class="bi bi-file-earmark-person"></i> Patients</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/appointment/"><i class="bi bi-calendar-check"></i> Rendez-vous</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <!-- Carrousel -->
     <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -168,16 +146,20 @@
         <section class="mt-5">
             <h2 class="text-center text-primary mb-4">Nos Services</h2>
             <div class="row">
+           {% if is_granted('ROLE_ADMIN') %}
+         
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card shadow-sm">
                         <img src="https://via.placeholder.com/300" class="card-img-top" alt="Médecin">
                         <div class="card-body">
                             <h5 class="card-title">Enregistrement des médecins</h5>
                             <p class="card-text">Gérez facilement les informations de vos médecins.</p>
-                            <a href="/doctor/register" class="btn btn-primary">Découvrir</a>
+                            <a href="/user-approval" class="btn btn-primary">Découvrir</a>
                         </div>
                     </div>
                 </div>
+                     
+            {% endif %}
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card shadow-sm">
                         <img src="https://via.placeholder.com/300" class="card-img-top" alt="Patient">
@@ -293,3 +275,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+{% endblock %}

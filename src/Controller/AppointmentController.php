@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Appointment;
 use App\Entity\Patient;
+use App\Entity\Speciality;
 use App\Form\AppointmentType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AppointmentController extends AbstractController
 {
@@ -28,11 +30,13 @@ class AppointmentController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $appointment = new Appointment();
+
         $form = $this->createForm(AppointmentType::class, $appointment);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+       
             $entityManager->persist($appointment);
             $entityManager->flush();
 
@@ -104,6 +108,62 @@ class AppointmentController extends AbstractController
 
         return $this->redirectToRoute('app_appointment');
     }
+    #[Route('/appointment/{id}/accepter', name: 'appointment_accepter', methods: ['POST'])]
+    public function accepter(Request $request, int $id, EntityManagerInterface $entityManager): Response
+    {
+        $appointment = $entityManager->getRepository(Appointment::class)->find($id);
+
+        if (!$appointment) {
+            throw $this->createNotFoundException('Le rendez-vous demandé n\'existe pas.');
+        }
+
+        if ($this->isCsrfTokenValid('accepter'.$appointment->getId(), $request->request->get('_token'))) {
+            $appointment->setstatut("accept");
+            $entityManager->persist($appointment);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'La demande de  rendez-vous a été accepté avec succès.');
+        }
+
+        return $this->redirectToRoute('app_appointment');
+    }
+
+    #[Route('/appointment/{id}/refuser', name: 'appointment_refuser', methods: ['POST'])]
+    public function refuser(Request $request, int $id, EntityManagerInterface $entityManager): Response
+    {
+        $appointment = $entityManager->getRepository(Appointment::class)->find($id);
+
+        if (!$appointment) {
+            throw $this->createNotFoundException('Le rendez-vous demandé n\'existe pas.');
+        }
+
+        if ($this->isCsrfTokenValid('refuser'.$appointment->getId(), $request->request->get('_token'))) {
+            $appointment->setstatut("reject");
+            $entityManager->persist($appointment);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'La demande de rendez-vous a été réfusé.');
+        }
+
+        return $this->redirectToRoute('app_appointment');
+    }
+    #[Route('/get-doctors/{id}', name: 'get_doctors', methods: ['GET'])]
+    public function getDoctors(Speciality $speciality): JsonResponse
+    {
+        $doctors = $speciality->getDoctors();
+    
+        $response = [];
+        foreach ($doctors as $doctor) {
+            $response[] = [
+                'id' => $doctor->getId(),
+                'firstName' => $doctor->getFirstName(),
+                'lastName' => $doctor->getLastName(),
+            ];
+        }
+    
+        return new JsonResponse($response);
+    }
+    
 
     
 }

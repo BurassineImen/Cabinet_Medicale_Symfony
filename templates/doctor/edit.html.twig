@@ -1,16 +1,146 @@
-{% extends 'base.html.twig' %}
+{% include 'header.html.twig' %}
+<div class="container mt-4 edit-doctor-container">
+    <style>
+        /* Conteneur principal */
+        .edit-doctor-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #e3f2fd, #ffffff);
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
 
-{% block title %}Modifier Médecin{% endblock %}
+        /* Titre principal */
+        .edit-doctor-title {
+            font-size: 2.8rem;
+            font-weight: bold;
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            animation: fadeInDown 1s ease;
+        }
 
-{% block body %}
-    <div class="container mt-4">
-        <h1>Modifier le médecin</h1>
+        /* Animation pour le titre */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <button class="btn btn-primary">Mettre à jour</button>
-        {{ form_end(form) }}
+        /* Formulaire */
+        .edit-doctor-container form {
+            margin-top: 20px;
+        }
 
-        <a href="{{ path('doctor_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
-    </div>
-{% endblock %}
+        .edit-doctor-container form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .edit-doctor-container form input, 
+        .edit-doctor-container form select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #495057;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .edit-doctor-container form input:focus, 
+        .edit-doctor-container form select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Boutons */
+        .edit-doctor-container .btn-primary {
+            background: #007bff;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .edit-doctor-container .btn-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        .edit-doctor-container .btn-secondary {
+            background: #6c757d;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .edit-doctor-container .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(108, 117, 125, 0.4);
+        }
+
+        /* Espacement pour le bouton de retour */
+        .btn-secondary.mt-3 {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* Ajout d'espacement entre les champs */
+        .form-group + .form-group {
+            margin-top: 15px;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .edit-doctor-container {
+                padding: 20px;
+            }
+
+            .edit-doctor-title {
+                font-size: 2.2rem;
+            }
+
+            .edit-doctor-container form input, 
+            .edit-doctor-container form select {
+                font-size: 0.9rem;
+                padding: 10px 12px;
+            }
+
+            .edit-doctor-container .btn-primary,
+            .edit-doctor-container .btn-secondary {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+
+    <h1 class="edit-doctor-title">Modifier le Médecin</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Mettre à jour</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('doctor_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+</div>

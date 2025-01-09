@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <style>
+        /* Corps de la page */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Conteneur du formulaire */
+        .form-container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #4e0ea0, #1d5bc2);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Messages d'erreur */
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Inscription - {{ role|capitalize }}</h1>
+
+        {{ form_start(registrationForm, { 'attr': { 'class': 'form' } }) }}
+        <div class="form-group">
+            {{ form_row(registrationForm.email, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.firstName, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.lastName, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.adress, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.password, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(registrationForm.phone, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+
+        {% if role == 'medecin' %}
+        <div class="form-group">
+            {{ form_row(registrationForm.speciality, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+            {{ form_row(registrationForm.agreeTerms, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        <button type="submit" class="btn">S'inscrire</button>
+        {{ form_end(registrationForm) }}
+    </div>
+</body>
+</html>

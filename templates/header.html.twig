@@ -26,25 +26,45 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">
+                    <a class="nav-link {{ app.request.get('_route') == 'home' ? 'active' : '' }}" href="{{ path('home') }}">
                         <i class="bi bi-house"></i> Accueil
                     </a>
                 </li>
+                  {% if  is_granted('ROLE_ADMIN')  %}
+                 <li class="nav-item">
+                    <a class="nav-link {{ app.request.get('_route') == 'app_speciality' ? 'active' : '' }}" href="{{ path('app_speciality') }}">
+                        <i class="bi bi-calendar-check"></i> Spécialité
+                    </a>
+                </li>
+                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'app_doctor' ? 'active' : '' }}" href="{{ path('app_doctor') }}">
+                    <a class="nav-link {{ app.request.get('_route') == 'doctor_index' ? 'active' : '' }}" href="{{ path('doctor_index') }}">
                         <i class="bi bi-person-circle"></i> Nos Médecins
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ app.request.get('_route') == 'app_patient' ? 'active' : '' }}" href="{{ path('app_patient') }}">
-                        <i class="bi bi-file-earmark-person"></i> Patients
-                    </a>
-                </li>
+               
                 <li class="nav-item">
                     <a class="nav-link {{ app.request.get('_route') == 'app_appointment' ? 'active' : '' }}" href="{{ path('app_appointment') }}">
                         <i class="bi bi-calendar-check"></i> Rendez-vous
                     </a>
                 </li>
+                  {% if not is_granted('ROLE_ADMIN') and not is_granted('ROLE_PATIENT') and not is_granted('ROLE_DOCTOR') %}
+                  <li class="nav-item">
+        <a class="nav-link active" href="/homeRegister"><i class="bi bi-house"></i> Inscription</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ app.request.get('_route') == 'app_login' ? 'active' : '' }}" href="{{ path('app_login') }}">
+            <i class="bi bi-calendar-check"></i> Connecter
+        </a>
+    </li>
+{% else %}
+
+
+    <li class="nav-item">
+        <a class="nav-link active" href="/logout"><i class="bi bi-house"></i> Déconnexion</a>
+    </li>
+{% endif %}
+
             </ul>
         </div>
     </div>

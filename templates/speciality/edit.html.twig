@@ -1,0 +1,97 @@
+{% include 'header.html.twig' %}
+
+{% block body %}
+    <style>
+        /* Conteneur principal */
+        .edit-container {
+            margin-top: 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f3f4f6, #ffffff);
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Titre */
+        .edit-title {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #495057;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Conteneur du formulaire */
+        .form-container {
+            margin-top: 20px;
+        }
+
+        /* Boutons */
+        .btn-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #007bff;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .btn-back i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .edit-container {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            .edit-title {
+                font-size: 2rem;
+            }
+
+            .btn-back {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+
+    <div class="container edit-container">
+        <h1 class="edit-title">Modifier la Spécialité</h1>
+
+        <div class="form-container">
+            {{ include('speciality/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        </div>
+
+        <div class="btn-container">
+            <a href="{{ path('app_speciality') }}" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Retour à la liste
+            </a>
+        </div>
+    </div>
+{% endblock %}

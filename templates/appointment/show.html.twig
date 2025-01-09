@@ -1,3 +1,5 @@
+{% block body %}
+    {% include 'header.html.twig' %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,12 +8,13 @@
     <title>Détails du rendez-vous</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
     <!-- Custom CSS -->
     <style>
         body {
             background-color: #f0f8ff;
             padding-top: 50px;
-        }
+
         h1 {
             color: #0056b3;
             text-align: center;
@@ -55,20 +58,16 @@
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1>Détails du rendez-vous</h1>
 
         <div class="details-container">
-            <p><strong>Médecin :</strong> {{ appointment.doctor.name }}</p>
+            <p><strong>Médecin :</strong> {{ appointment.doctor ? appointment.doctor.firstName : 'Non spécifié' }}</p>
+
             <p><strong>Date :</strong> {{ appointment.date|date('Y-m-d H:i') }}</p>
 
-            <div class="text-center">
-                <a href="{{ path('appointment_edit', { id: appointment.id }) }}" class="btn btn-primary">Modifier</a>
-                <form method="post" action="{{ path('appointment_delete', { id: appointment.id }) }}" style="display:inline;">
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ appointment.id) }}">
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
-                </form>
-            </div>
+           
         </div>
     </div>
 
@@ -76,3 +75,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+{% endblock %}
